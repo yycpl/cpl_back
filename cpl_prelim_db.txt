@@ -1,11 +1,46 @@
-CREATE TABLE feedback(
-id SERIAL PRIMARY KEY,
-first_name VARCHAR(50) NOT NULL,
-last_name VARCHAR(50) NOT NULL,
-employee_id VARCHAR(50) NOT NULL UNIQUE,
-branch VARCHAR(50) NOT NULL,
-category VARCHAR(50) NOT NULL,
-impact VARCHAR(75) NOT NULL,
-priority VARCHAR(50) NOT NULL,
-feedback VARCHAR(1000) NOT NULL
+//CPL Database Tables:
+
+//CPL DB Master Table:
+CREATE TABLE cpl_master(
+post_id SERIAL PRIMARY KEY,
+employee_id INTEGER REFERENCES employee,
+branch_id INTEGER REFERENCES branch,
+category_id INTEGER REFERENCES category,
+sub_cat_id INTEGER REFERENCES sub_category,
+impact_id INTEGER REFERENCES impact,
+priority_id INTEGER REFERENCES priority,
+feedback VARCHAR(2000) NOT NULL
 );
+
+// CPL Employee information table:
+CREATE TABLE employee (
+employee_id SERIAL PRIMARY KEY,
+cpl_id VARCHAR(100) NOT NULL,
+first_name VARCHAR(100) NOT NULL,
+last_name VARCHAR(100) NOT NULL
+);
+
+// CPL Branch information table:
+CREATE TABLE branch (
+branch_id SERIAL PRIMARY KEY,
+branch_name VARCHAR(100) NOT NULL);
+
+// CPL Feedback Category information table:
+CREATE TABLE category (
+category_id SERIAL PRIMARY KEY,
+category_name VARCHAR(100) NOT NULL);
+
+// CPL Feedback Sub-Category information table:
+CREATE TABLE sub_category (
+sub_cat_id SERIAL PRIMARY KEY,
+sub_cat_desc VARCHAR(100) NOT NULL);
+
+// CPL Impact Assessment information table:
+CREATE TABLE impact (
+impact_id SERIAL PRIMARY KEY,
+impact_desc VARCHAR(100) NOT NULL);
+
+// CPL Priority Assessment information table:
+CREATE TABLE priority (
+priority_id SERIAL PRIMARY KEY,
+priority_desc VARCHAR(100) NOT NULL);
